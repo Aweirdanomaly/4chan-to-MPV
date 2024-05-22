@@ -30,8 +30,8 @@ This project is entirely contained in 42M.py, so just delete it lmao
 
 This project (although functional) is still in early development and is meant to be expanded upon. Here are some of the features that I'm still implementing:
 
-- Allow for scraping other threads that aren't YGYL
-- Make a main menu that allows the user to select other threads
+- ~Allow for scraping other threads that aren't YGYL~
+- ~Make a main menu that allows the user to select other threads~
 - Actually make a Demo vid for the readme
 - Scrape for post content
 - Add shuffle button option instead of leaving it on by default
