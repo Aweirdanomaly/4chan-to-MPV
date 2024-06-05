@@ -12,5 +12,10 @@ setup(
         'colorama',
         'cowsay'
     ],
+    entry_points={
+        "console_scripts":[
+            "42m = 42M:main",
+        ],
+    },
     
 )

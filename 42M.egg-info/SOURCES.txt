@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+42M/__init__.py
+42M/main.py
+42M.egg-info/PKG-INFO
+42M.egg-info/SOURCES.txt
+42M.egg-info/dependency_links.txt
+42M.egg-info/entry_points.txt
+42M.egg-info/requires.txt
+42M.egg-info/top_level.txt

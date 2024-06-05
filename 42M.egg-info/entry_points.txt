@@ -1,0 +1,2 @@
+[console_scripts]
+42m = 42M:main
