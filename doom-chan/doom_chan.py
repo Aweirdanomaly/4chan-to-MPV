@@ -4,9 +4,9 @@ from bs4 import BeautifulSoup
 import sys
 import platform
 import os
-#Add env variable to path if on Windows
+#Temprarily add env variable to path if on Windows
 if platform.system() == 'Windows':
-    os.environ["PATH"] = os.path.abspath('') + os.pathsep + os.environ["PATH"]
+    os.environ["PATH"] = os.path.dirname(__file__) + os.pathsep + os.environ["PATH"]
 import mpv
 import json
 from colorama import Fore, Style
@@ -101,25 +101,25 @@ boards=[{'filename': '/a/ Anime & Manga', 'id': 1},
  {'filename': '/r/ Adult Requests', 'id': 76}]
 
 def getThreads(board='wsg'):
-    ans = requests.get(f"https://boards.4chan.org/{board}/catalog")
-    soup = BeautifulSoup(ans.text, 'html.parser')
-    scripts = soup.find_all("script")
-    script = [s for s in scripts if len(s.text)>400][0].text
-    catalog_pattern = r'var\s+catalog\s*=\s*({.*?});'
-    dictJS = re.search(catalog_pattern, script, re.DOTALL).group(1)
-    d= json.loads(dictJS)
-    #filter stickies here
-    return ([{"filename" :html.unescape(d['threads'][num]['sub'] + f"{'' if d['threads'][num]['sub']=='' else ' '}" + d['threads'][num]['teaser']).replace("\n", ""), "id":idx+1} for idx, num in enumerate(d['threads']) ], [num for num in d['threads']])
-    # return [thread for thread in d["threads"] if "ygyl" in d["threads"][thread]["sub"].lower()]
-    
+    try:
+        ans = requests.get(f"https://boards.4chan.org/{board}/catalog")
+        soup = BeautifulSoup(ans.text, 'html.parser')
+        scripts = soup.find_all("script")
+        script = [s for s in scripts if len(s.text)>400][0].text
+        catalog_pattern = r'var\s+catalog\s*=\s*({.*?});'
+        dictJS = re.search(catalog_pattern, script, re.DOTALL).group(1)
+        d= json.loads(dictJS)
+        return ([{"filename" :html.unescape(f"{d['threads'][num]['sub'] if isinstance(d['threads'][num]['sub'], str) else ''}" + f"{'' if d['threads'][num]['sub']=='' else ' '}" + d['threads'][num]['teaser']).replace("\n", ""), "id":idx+1} for idx, num in enumerate(d['threads']) ], [num for num in d['threads']])
+    except:
+        print([d['threads'][num]['sub'] for idx, num in enumerate(d['threads']) ])
+        print("\n\n\n\n")
+        print(e)
+
 def getVids(state):
     ans = requests.get(f"https://boards.4chan.org/{state['board']}/thread/{state['links'][state['threadIdx']]}")
     soup = BeautifulSoup(ans.text, 'html.parser')
     links = soup.find_all("a", class_ ="fileThumb")
     return [f"https:{link['href']}" for link in links]
-
-
-
 
 def prettyPrint(vids, current=-1, page=-1):
     columns, lines = os.get_terminal_size()
@@ -139,8 +139,6 @@ def prettyPrint(vids, current=-1, page=-1):
 def playVids(vids, **kwargs):
     
     player = mpv.MPV(input_default_bindings=True, input_vo_keyboard=True, terminal=True, input_terminal=True, osc=True, really_quiet=True, loglevel='terminal-default',  **kwargs) 
-
-
     for vid in vids:
         player.playlist_append(vid)
     
@@ -176,13 +174,10 @@ def playVids(vids, **kwargs):
     
     try:
         player.wait_for_property('idle-active')
-        # player.wait_for_playback() Will use this if allow to queue any video order
         print("done")
     except mpv.ShutdownError:
         pass
     player.terminate()     
-    # player.quit(0)
-
 
 def getTerminalSize(state):
     columns, lines = os.get_terminal_size()
@@ -261,22 +256,8 @@ def parseChoice(state):
         
 
 def main():
-    parser = argparse.ArgumentParser(prog='42M', description="Make a playlist out of a 4chan thread")
-    parser.add_argument('--no-video', dest='video', action='store_false', default='auto')
-    parser.add_argument('-query', required=False, type=str, help='type of thread to look for')
-    parser.add_argument('-a', dest='audio', type=str, help='Plays audio only, no video')
-
-    
-
-
+    parser = argparse.ArgumentParser(prog='doom-chan', description="Makes playlists out of 4chan threads")
     args = parser.parse_args()
-
-
-    # print(args.query)
-
-    # print("passed")
-
-
 
     state = {
         'terminal': 
@@ -292,10 +273,11 @@ def main():
         'links': [],
         'threadIdx': 1
     }
+
     #scrape info
     state=getListInfo(state)
 
-    while True: 
+    while True:
         #choose params
         state['threadIdx'] = parseChoice(state)
 
@@ -305,7 +287,7 @@ def main():
         random.shuffle(vids)
 
         #mpv vids
-        playVids(vids, video=args.video)
+        playVids(vids)
 
 if __name__ == "__main__":
     main()

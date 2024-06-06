@@ -1,0 +1,1 @@
+from .doom_chan import main
