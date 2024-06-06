@@ -2,8 +2,7 @@
 
 This CLI lets you browse 4chan from the terminal and make a playlist out of any thread, streamlining the experience and making it more doomscroll-able. 
 
-![DemoVideo](https://files.catbox.moe/h217nm.webm)
-![DV](./assets/demo.gif)
+![DemoVideo](./assets/demo.gif)
 
 Although this was originally made to turn video-heavy threads from [/wsg/](https://4chan.org/wsg/catalog) into playlists (YGYL threads mostly), all threads on all boards on 4chan are now supported, including those with just images present.
 
