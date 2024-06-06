@@ -28,10 +28,6 @@ All the mpv key bindings can also be used for this cli, so `[` and `]` can be us
 - [MPV](https://mpv.io/installation/)
 
 
-##### Windows Only:
-
-- [libmpv](https://sourceforge.net/projects/mpv-player-windows/files/libmpv/) (download and extract the folder, then place `libmpv-2.dll` wherever you download this library) 
-
 ## Installation
 
 Once you have the requirements set up, just run `pip install doom_chan` and everything will be installed.
