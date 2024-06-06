@@ -1,45 +1,50 @@
-# 4Chan to MPV (42M for short)
+# Doom Chan
 
-This library lets you make a playlist out of any thread on 4chan's [/wsg/ board](https://4chan.org/wsg/catalog)
+This CLI lets you browse 4chan from the terminal and make a playlist out of any thread, streamlining the experience and making it more doomscroll-able. 
 
-Demo Vid goes here (just imagine there is one here for now)
+![DemoVideo](https://files.catbox.moe/h217nm.webm)
+![DV](./assets/demo.gif)
 
-## Requirements
+Although this was originally made to turn video-heavy threads from [/wsg/](https://4chan.org/wsg/catalog) into playlists (YGYL threads mostly), all threads on all boards on 4chan are now supported, including those with just images present.
 
-- [Python](https://www.python.org/downloads/) (version 3.9 or above)
-- [MPV](https://mpv.io/installation/)
-
-##### Windows Only:
-
-- [libmpv](https://sourceforge.net/projects/mpv-player-windows/files/libmpv/) (download and extract the folder, then place `libmpv-2.dll` wherever you download this library)
-
-## Installation
-
-1- Download 42M.py and requirements.txt
-2- Run `pip install -r requirements.txt`
+The order of videos is also always shuffled to keep it fresh.
 
 ## Usage
 
-Go into the directory where 42M.py is located and run `python 42M.py`
+Run `dc` to launch the cli
+
+- `b` switches between boards and displays their threads
+- `f` searches for a specific string in thread titles
+- numbers are used to select boards and threads
+- `Enter` and `Shift+Enter` can be used to go to the next and previous videos in the playlist and `Esc` quits the playlist
+- `q` quits the CLI
+
+All the mpv key bindings can also be used for this cli, so `[` and `]` can be used to change the speed of the video and the arrow keys can be used to seek within the video. If you're unfamiliar with mpv, here's a full list of all the [keyboard controls](https://mpv.io/manual/master/#keyboard-control).
+
+## Requirements
+
+- [Python](https://www.python.org/downloads/) (version 3.10 or above)
+- [MPV](https://mpv.io/installation/)
+
+
+<!-- ##### Windows Only:
+
+- [libmpv](https://sourceforge.net/projects/mpv-player-windows/files/libmpv/) (download and extract the folder, then place `libmpv-2.dll` wherever you download this library) -->
+
+## Installation
+
+Once you have the requirements installed, just run `pip install doom_chan`.
 
 ## Uninstallation
 
-This project is entirely contained in 42M.py, so just delete it lmao
+Run `pip uninstall doom_chan`
 
-## TODO
+## Contributions
 
-This project (although functional) is still in early development and is meant to be expanded upon. Here are some of the features that I'm still implementing:
-
-- ~Allow for scraping other threads that aren't YGYL~
-- ~Make a main menu that allows the user to select other threads~
-- Actually make a Demo vid for the readme
-- Scrape for post content
-- Add shuffle button option instead of leaving it on by default
-- Parse a variety of commands like audio only
-- Get lib approved on PyPl for easier installing
+Pull requests are always welcome, but please do open an issue first if you plan on implementing major changes.
 
 ## Inspiration
 
 This library was inspired by projects like [yewtube](https://github.com/mps-youtube/yewtube) and [ani-cli](https://github.com/pystardust/ani-cli) which scrape the internet and let you surf🏄 platforms from a CLI.
 
-This project would also not have been possible without [python-mpv](https://github.com/jaseg/python-mpv). If it weren't for this library, I would not be able to write this in Python.
+This project would also not have been possible without [python-mpv](https://github.com/jaseg/python-mpv). If it weren't for this library, I would not have been able to connect to mpv with Python.
