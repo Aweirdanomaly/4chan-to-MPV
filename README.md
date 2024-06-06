@@ -20,19 +20,28 @@ Run `dc` to launch the cli
 
 All the mpv key bindings can also be used for this cli, so `[` and `]` can be used to change the speed of the video and the arrow keys can be used to seek within the video. If you're unfamiliar with mpv, here's a full list of all the [keyboard controls](https://mpv.io/manual/master/#keyboard-control).
 
+
+
 ## Requirements
 
 - [Python](https://www.python.org/downloads/) (version 3.10 or above)
 - [MPV](https://mpv.io/installation/)
 
 
-<!-- ##### Windows Only:
+##### Windows Only:
 
-- [libmpv](https://sourceforge.net/projects/mpv-player-windows/files/libmpv/) (download and extract the folder, then place `libmpv-2.dll` wherever you download this library) -->
+- [libmpv](https://sourceforge.net/projects/mpv-player-windows/files/libmpv/) (download and extract the folder, then place `libmpv-2.dll` wherever you download this library) 
 
 ## Installation
 
-Once you have the requirements installed, just run `pip install doom_chan`.
+Once you have the requirements set up, just run `pip install doom_chan` and everything will be installed.
+
+-----------------------------------------------------
+If you like installing things the _hard_ way, you can also just download and use `./doom_chan/doom_chan.py` since all the code is entirely contained there. 
+
+However, Windows users (and only Windows users) will also need to download and install [libmpv](https://sourceforge.net/projects/mpv-player-windows/files/libmpv/). After the download, extract the folder, then place `libmpv-2.dll` in the same folder as `doom_chan.py`.
+
+You don't need to worry about any of this if you just install this project with `pip` though.
 
 ## Uninstallation
 
